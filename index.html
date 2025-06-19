@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Meet the Monkey!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fefefe;
+      color: #333;
+      text-align: center;
+    }
+    .monkey-intro img {
+      width: 200px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .monkey-intro h1 {
+      margin: 20px 0 10px;
+      font-size: 28px;
+    }
+    .monkey-intro p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    .expression-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      margin-bottom: 40px;
+      padding: 0 10px;
+    }
+    .expression-btn {
+      padding: 10px 14px;
+      background: #ffda6c;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .expression-btn:hover {
+      background: #ffd13e;
+    }
+    #player-container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    video {
+      width: 100%;
+      border-radius: 15px;
+      border: 2px solid #ddd;
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="monkey-intro">
+    <img src="videos/monkey3d.png" alt="Monkey Mascot" />
+    <h1>Meet S-Monkey 🐒</h1>
+    <p>Our expressive 3D monkey mascot — watch how he feels and moves below!</p>
+  </div>
+
+  <div class="expression-grid" id="expressionGrid"></div>
+
+  <div id="player-container">
+    <video id="mainPlayer" controls muted loop playsinline></video>
+  </div>
+
+  <script>
+    const expressions = [
+      'angry', 'embarassing', 'happy', 'idle',
+      'jogging', 'jumping', 'laughing', 'loving',
+      'running', 'sad', 'scared', 'sleeping',
+      'surprise', 'thinking', 'thumbsup', 'waving'
+    ];
+
+    const grid = document.getElementById('expressionGrid');
+    const player = document.getElementById('mainPlayer');
+
+    expressions.forEach(expr => {
+      const btn = document.createElement('button');
+      btn.className = 'expression-btn';
+      btn.textContent = expr.charAt(0).toUpperCase() + expr.slice(1);
+      btn.addEventListener('click', () => {
+        player.src = `videos/${expr}.mp4`;
+        player.style.display = 'block';
+        player.play();
+      });
+      grid.appendChild(btn);
+    });
+  </script>
+
+</body>
+</html>
